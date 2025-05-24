@@ -2,11 +2,12 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": "",
+    "title": "Ecommerce REST API",
+    "description": "Scalable REST API for Ecommerce Platform built by Sahil Dev",
     "contact": {
       "name": "Sahil Dev",
-      "email": "dev.sahil@icloud.com"
+      "email": "dev.sahil@icloud.com",
+      "website": "https://isahil.vercel.app"
     }
   },
   "host": "localhost:8000",
@@ -171,6 +172,395 @@
         }
       }
     },
+    "/brands/{slug}": {
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get brand by Slug Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/brands": {
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "get brands Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/brands/create": {
+      "post": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create Brand",
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create brand Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/brands/{slug}": {
+      "put": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update brand Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete brand by Slug Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{slug}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get collection by Slug Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "get collections Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/collections/create": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create collection Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/collections/{slug}": {
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update collection Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete collection by Slug Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/media/upload": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "description": "Upload Media",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/products": {
       "get": {
         "tags": [
@@ -210,6 +600,158 @@
         "responses": {
           "200": {
             "description": "Get Product by SKU",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/products/create": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Product Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/products/{sku}": {
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Product Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Product Admin",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admin/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Get Products",
             "schema": {
               "$ref": "#/definitions/SuccessResponse"
             }
@@ -264,6 +806,193 @@
         "isEmailVerified": {
           "type": "string",
           "example": "Boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "Date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "Date"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "String"
+        },
+        "name": {
+          "type": "string",
+          "example": "String"
+        },
+        "sku": {
+          "type": "string",
+          "example": "String"
+        },
+        "collections": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "brand": {
+          "type": "string",
+          "example": "String"
+        },
+        "price": {
+          "type": "string",
+          "example": "Number"
+        },
+        "salePrice": {
+          "type": "string",
+          "example": "Number"
+        },
+        "stock": {
+          "type": "string",
+          "example": "Number"
+        },
+        "images": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "public_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "asset_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "resource_type": {
+              "type": "string",
+              "example": "String"
+            },
+            "url": {
+              "type": "string",
+              "example": "String"
+            }
+          }
+        },
+        "isFeatured": {
+          "type": "string",
+          "example": "Boolean"
+        },
+        "isVisible": {
+          "type": "string",
+          "example": "Boolean"
+        },
+        "status": {
+          "type": "string",
+          "example": "enum['ACTIVE', 'DRAFT']"
+        },
+        "handle": {
+          "type": "string",
+          "example": "String"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "Date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "Date"
+        }
+      }
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "String"
+        },
+        "name": {
+          "type": "string",
+          "example": "String"
+        },
+        "slug": {
+          "type": "string",
+          "example": "String"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "public_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "asset_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "resource_type": {
+              "type": "string",
+              "example": "String"
+            },
+            "url": {
+              "type": "string",
+              "example": "String"
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "Date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "Date"
+        }
+      }
+    },
+    "Collection": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "String"
+        },
+        "name": {
+          "type": "string",
+          "example": "String"
+        },
+        "slug": {
+          "type": "string",
+          "example": "String"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "public_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "asset_id": {
+              "type": "string",
+              "example": "String"
+            },
+            "resource_type": {
+              "type": "string",
+              "example": "String"
+            },
+            "url": {
+              "type": "string",
+              "example": "String"
+            }
+          }
         },
         "createdAt": {
           "type": "string",

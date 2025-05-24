@@ -47,8 +47,8 @@ export const uploadMedia = AsyncHandler(async (req, res) => {
 
       media.push(
         await Media.findOneAndUpdate(
-          { public_id: result.public_id, user: req.user._id },
-          { ...result, user: req.user._id },
+          { public_id: result.public_id },
+          { ...result },
           {
             upsert: true,
             returnDocument: "after",

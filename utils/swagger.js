@@ -64,11 +64,12 @@ import swaggerAutogen from "swagger-autogen";
 const doc = {
   info: {
     version: "1.0.0", // by default: '1.0.0'
-    title: "REST API", // by default: 'REST API'
-    description: "", // by default: ''
+    title: "Ecommerce REST API", // by default: 'REST API'
+    description: "Scalable REST API for Ecommerce Platform built by Sahil Dev", // by default: ''
     contact: {
       name: "Sahil Dev",
       email: "dev.sahil@icloud.com",
+      website: "https://isahil.vercel.app",
     },
   },
   host: "localhost:8000", // by default: 'localhost:3000'
@@ -126,6 +127,57 @@ const doc = {
     User: {
       email: "String",
       isEmailVerified: "Boolean",
+      createdAt: "Date",
+      updatedAt: "Date",
+    },
+    Product: {
+      _id: "String",
+      name: "String",
+      sku: "String",
+      collections: [],
+      brand: "String",
+      price: "Number",
+      salePrice: "Number",
+      stock: "Number",
+      images: {
+        _id: "String",
+        public_id: "String",
+        asset_id: "String",
+        resource_type: "String",
+        url: "String",
+      },
+      isFeatured: "Boolean",
+      isVisible: "Boolean",
+      status: "enum['ACTIVE', 'DRAFT']",
+      handle: "String",
+      createdAt: "Date",
+      updatedAt: "Date",
+    },
+    Brand: {
+      _id: "String",
+      name: "String",
+      slug: "String",
+      image: {
+        _id: "String",
+        public_id: "String",
+        asset_id: "String",
+        resource_type: "String",
+        url: "String",
+      },
+      createdAt: "Date",
+      updatedAt: "Date",
+    },
+    Collection: {
+      _id: "String",
+      name: "String",
+      slug: "String",
+      image: {
+        _id: "String",
+        public_id: "String",
+        asset_id: "String",
+        resource_type: "String",
+        url: "String",
+      },
       createdAt: "Date",
       updatedAt: "Date",
     },

@@ -197,7 +197,7 @@ const login = AsyncHandler(async (req, res) => {
 
   if (!isPasswordMatched) throw new AppError(400, "Invalid Credentials");
 
-  const token = await jwt.sign(
+  const token = jwt.sign(
     {
       id: user.id,
       email: user.email,

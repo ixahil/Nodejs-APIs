@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 // Routes
-// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 app.get("/api/v1", (req, res) => res.send("welcome"));
 app.use(

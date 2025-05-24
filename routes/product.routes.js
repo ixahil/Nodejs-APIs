@@ -4,7 +4,6 @@ import {
   deleteProduct,
   getProductBySku,
   getProducts,
-  getProductsByUser,
   updateProduct,
 } from "../controllers/product.controller.js";
 import { authenticate } from "../middleware/authenticate.js";
@@ -31,8 +30,4 @@ productRouter.delete(
   deleteProduct
 );
 
-productRouter.get(
-  "/admin/products",
-  authenticate(["ADMIN"]),
-  getProductsByUser
-);
+productRouter.get("/admin/products", getProducts);

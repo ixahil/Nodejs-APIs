@@ -3,7 +3,7 @@ import { Collection } from "../models/collection.model.js";
 import AppResponse from "../utils/AppResponse.js";
 
 export const createCollection = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['collection']
+  // #swagger.tags = ['Collection']
 
   /* #swagger.responses[200] = {
             description: 'Create collection Admin',
@@ -15,13 +15,12 @@ export const createCollection = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const { name, slug, image } = req.body;
+  const { name, slug, image = [] } = req.body;
 
   const collection = await Collection.create({
     name,
     slug,
     image,
-    user: req.user._id,
   });
   res
     .status(201)
@@ -29,7 +28,7 @@ export const createCollection = AsyncHandler(async (req, res) => {
 });
 
 export const updateCollection = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['collection']
+  // #swagger.tags = ['Collection']
 
   /* #swagger.responses[200] = {
             description: 'Update collection Admin',
@@ -41,10 +40,10 @@ export const updateCollection = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const { name, image } = req.body;
+  const { name, image = [] } = req.body;
 
   const collection = await Collection.findOneAndUpdate(
-    { slug: req.params.slug, user: req.user._id },
+    { slug: req.params.slug },
     { name, image }
   );
   res
@@ -53,7 +52,7 @@ export const updateCollection = AsyncHandler(async (req, res) => {
 });
 
 export const getCollections = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['collection']
+  // #swagger.tags = ['Collection']
 
   /* #swagger.responses[200] = {
             description: 'get collections Admin',
@@ -65,12 +64,12 @@ export const getCollections = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const collections = await Collection.find();
+  const collections = await Collection.find().populate("image");
   res.status(200).json(new AppResponse(200, collections));
 });
 
 export const getCollectionBySlug = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['collection']
+  // #swagger.tags = ['Collection']
 
   /* #swagger.responses[200] = {
             description: 'get collection by Slug Admin',
@@ -82,12 +81,14 @@ export const getCollectionBySlug = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const collection = await Collection.findOne({ slug: req.params.slug });
+  const collection = await Collection.findOne({
+    slug: req.params.slug,
+  }).populate("image");
   res.status(200).json(new AppResponse(200, collection));
 });
 
 export const deleteCollectionBySlug = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['collection']
+  // #swagger.tags = ['Collection']
 
   /* #swagger.responses[200] = {
             description: 'delete collection by Slug Admin',
@@ -101,7 +102,6 @@ export const deleteCollectionBySlug = AsyncHandler(async (req, res) => {
 
   const collection = await Collection.findOneAndDelete({
     slug: req.params.slug,
-    user: req.user._id,
   });
   res
     .status(200)

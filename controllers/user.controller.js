@@ -14,6 +14,6 @@ export const getUser = AsyncHandler(async (req, res, next) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const { _id, password, ...user } = req.user;
+  const { _id, password, ...user } = req.user._doc;
   res.status(200).json(new AppResponse(200, user));
 });

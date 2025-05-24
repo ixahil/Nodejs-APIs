@@ -41,7 +41,6 @@ export const getProductBySku = AsyncHandler(async (req, res) => {
 });
 
 // Protected Routes
-
 export const createProduct = AsyncHandler(async (req, res) => {
   // #swagger.tags = ['Product']
 
@@ -191,21 +190,4 @@ export const deleteProduct = AsyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new AppResponse(200, existing, "Product deleted successfully"));
-});
-
-export const getProductsByUser = AsyncHandler(async (req, res) => {
-  // #swagger.tags = ['Product']
-
-  /* #swagger.responses[200] = {
-            description: 'Get Products Admin - By User',
-            schema: { $ref: '#/definitions/SuccessResponse' }
-    } */
-
-  /* #swagger.responses[400] = {
-          description: 'Bad Request.',
-          schema: { $ref: '#/definitions/ErrorResponse' }
-  } */
-  const products = await Product.find().populate("images");
-
-  res.status(200).json(new AppResponse(200, products));
 });
