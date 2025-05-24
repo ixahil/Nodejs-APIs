@@ -1,0 +1,319 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": "",
+    "contact": {
+      "name": "Sahil Dev",
+      "email": "dev.sahil@icloud.com"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication Routes"
+    },
+    {
+      "name": "User",
+      "description": "User Routes"
+    }
+  ],
+  "schemes": [],
+  "securityDefinitions": {},
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Resend Verification.",
+            "schema": {
+              "$ref": "#/definitions/RegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login User",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new user.",
+            "schema": {
+              "$ref": "#/definitions/RegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Register User",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new user.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "otp": {
+                  "type": "number",
+                  "example": 1234
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Verify OTP",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/resend-verification": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Resend Verification.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resend Verification Email",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get logged in User",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "String"
+        },
+        "isEmailVerified": {
+          "type": "string",
+          "example": "Boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "Date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "Date"
+        }
+      }
+    },
+    "RegisterRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "user@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "securepassword"
+        }
+      }
+    },
+    "SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "200/201"
+        },
+        "data": {
+          "type": "string",
+          "example": "{}"
+        },
+        "message": {
+          "type": "string",
+          "example": "Success!"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "400/401/403/500"
+        },
+        "data": {
+          "type": "string",
+          "example": "null"
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "errors": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "isOperational": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Message about the error"
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemas": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "UnAuthorizedError": {
+        "status": "401",
+        "data": "null",
+        "success": false,
+        "errors": [],
+        "isOperational": true,
+        "message": "UnAuthorized, You are not authorized"
+      },
+      "BadRequest": {
+        "status": "400",
+        "data": "null",
+        "success": false,
+        "errors": [],
+        "isOperational": true,
+        "message": "Bad Request"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
