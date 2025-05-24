@@ -3,7 +3,7 @@ import {
   createCollection,
   deleteCollectionBySlug,
   getCollectionBySlug,
-  getCollection,
+  getCollections,
   updateCollection,
 } from "../controllers/collection.controller.js";
 import { authenticate } from "../middleware/authenticate.js";
@@ -11,7 +11,7 @@ import { authenticate } from "../middleware/authenticate.js";
 export const collectionRouter = Router();
 
 collectionRouter.get("/collection/:slug", getCollectionBySlug);
-collectionRouter.get("/collection", getCollection);
+collectionRouter.get("/collection", getCollections);
 
 // Protected
 collectionRouter.post(

@@ -13,6 +13,7 @@ import { productRouter } from "./routes/product.routes.js";
 import fileUpload from "express-fileupload";
 import { mediaRouter } from "./routes/media.route.js";
 import { brandRouter } from "./routes/brand.route.js";
+import { collectionRouter } from "./routes/collection.route.js";
 
 configDotenv();
 
@@ -37,7 +38,8 @@ app.use(
   userRouter,
   productRouter,
   mediaRouter,
-  brandRouter
+  brandRouter,
+  collectionRouter
 );
 
 // Error Handlers Middlewares

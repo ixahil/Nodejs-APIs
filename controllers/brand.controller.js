@@ -17,7 +17,7 @@ export const createBrand = AsyncHandler(async (req, res) => {
 
   const { name, slug, image } = req.body;
 
-  const brand = await Brand.create({ name, slug, image });
+  const brand = await Brand.create({ name, slug, image, user: req.user._id });
   res.status(201).json(new AppResponse(201, brand, "created successfully!"));
 });
 
@@ -37,7 +37,7 @@ export const updateBrand = AsyncHandler(async (req, res) => {
   const { name, image } = req.body;
 
   const brand = await Brand.findOneAndUpdate(
-    { slug: req.params.slug },
+    { slug: req.params.slug, user: req.user._id },
     { name, image }
   );
   res.status(201).json(new AppResponse(201, brand, "updated successfully!"));
@@ -90,6 +90,9 @@ export const deleteBrandBySlug = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const brand = await Brand.findOneAndDelete({ slug: req.params.slug });
+  const brand = await Brand.findOneAndDelete({
+    slug: req.params.slug,
+    user: req.user._id,
+  });
   res.status(200).json(new AppResponse(200, brand, "deleted successfully!"));
 });

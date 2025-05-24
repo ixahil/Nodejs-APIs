@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const BrandSchema = new Schema(
+const CollectionSchema = new Schema(
   {
     slug: {
       type: String,
@@ -24,4 +24,4 @@ const BrandSchema = new Schema(
   },
   { timestamps: true }
 );
-export const Brand = model("Brand", BrandSchema);
+export const Collection = model("Collection", CollectionSchema);
