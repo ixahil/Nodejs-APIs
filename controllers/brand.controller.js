@@ -15,10 +15,32 @@ export const createBrand = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
-  const { name, slug } = req.body;
+  const { name, slug, image } = req.body;
 
-  const brand = await Brand.create({ name, slug });
+  const brand = await Brand.create({ name, slug, image });
   res.status(201).json(new AppResponse(201, brand, "created successfully!"));
+});
+
+export const updateBrand = AsyncHandler(async (req, res) => {
+  // #swagger.tags = ['brand']
+
+  /* #swagger.responses[200] = {
+            description: 'Update brand Admin',
+            schema: { $ref: '#/definitions/SuccessResponse' }
+    } */
+
+  /* #swagger.responses[400] = {
+          description: 'Bad Request.',
+          schema: { $ref: '#/definitions/ErrorResponse' }
+  } */
+
+  const { name, image } = req.body;
+
+  const brand = await Brand.findOneAndUpdate(
+    { slug: req.params.slug },
+    { name, image }
+  );
+  res.status(201).json(new AppResponse(201, brand, "updated successfully!"));
 });
 
 export const getBrands = AsyncHandler(async (req, res) => {

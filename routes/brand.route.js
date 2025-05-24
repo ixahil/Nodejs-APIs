@@ -4,6 +4,7 @@ import {
   deleteBrandBySlug,
   getBrandBySlug,
   getBrands,
+  updateBrand,
 } from "../controllers/brand.controller.js";
 import { authenticate } from "../middleware/authenticate.js";
 
@@ -13,5 +14,10 @@ brandRouter.get("/brands/:slug", getBrandBySlug);
 brandRouter.get("/brands", getBrands);
 
 // Protected
-brandRouter.post("/brands/create", authenticate(["ADMIN"]), createBrand);
-brandRouter.delete("/brands/:slug", deleteBrandBySlug);
+brandRouter.post("/admin/brands/create", authenticate(["ADMIN"]), createBrand);
+brandRouter.put("/admin/brands/:slug", authenticate(["ADMIN"]), updateBrand);
+brandRouter.delete(
+  "/admin/brands/:slug",
+  authenticate(["ADMIN"]),
+  deleteBrandBySlug
+);

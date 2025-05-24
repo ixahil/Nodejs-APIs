@@ -4,4 +4,4 @@ import { authenticate } from "../middleware/authenticate.js";
 
 export const mediaRouter = Router();
 
-mediaRouter.post("/media/upload", authenticate(["ADMIN"]), uploadMedia);
+mediaRouter.post("/admin/media/upload", authenticate(["ADMIN"]), uploadMedia);
