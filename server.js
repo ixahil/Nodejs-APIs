@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
 // Routes
-app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 app.get("/api/v1", (req, res) => res.send("welcome"));
 app.use("/api/v1/", authRouter, userRouter, productRouter);

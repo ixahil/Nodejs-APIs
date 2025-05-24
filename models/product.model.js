@@ -21,11 +21,11 @@ const ProductSchema = new Schema(
         ref: "Collection",
       },
     ],
-    brand: {
-      type: Schema.Types.ObjectId,
-      ref: "Brand",
-      default: "Brand",
-    },
+    // brand: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Brand",
+    //   default: "Brand",
+    // },
     price: {
       default: 0,
       type: Number,
@@ -47,7 +47,7 @@ const ProductSchema = new Schema(
       ],
       default: [],
     },
-    owner: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },

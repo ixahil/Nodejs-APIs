@@ -53,6 +53,8 @@ export const createProduct = AsyncHandler(async (req, res) => {
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
 
+  if (!req.body) throw new AppError(400, "fill the required data!");
+
   const { error, value } = validateProduct(req.body);
   if (error) {
     const errorMessages = error.details.map((err) => err.message);
@@ -64,8 +66,7 @@ export const createProduct = AsyncHandler(async (req, res) => {
   if (existing) {
     throw new AppError(400, "Product with this SKU already exists");
   }
-
-  const product = await Product.create(value);
+  const product = await Product.create({ ...value, user: req.user._id });
 
   return res
     .status(201)
@@ -84,6 +85,8 @@ export const updateProduct = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
+
+  if (!req.body) throw new AppError(400, "fill the required data!");
 
   const { error, value } = validateProduct(req.body);
   if (error) {
@@ -145,7 +148,7 @@ export const getProductsByUser = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
-  const products = await Product.find({ owner: req.user.id });
+  const products = await Product.find({ user: req.user.id });
 
   res.status(200).json(new AppResponse(200, products));
 });
