@@ -10,6 +10,8 @@ import { AppError } from "./utils/AppError.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./utils/swagger-output.json" assert { type: "json" };
 import { productRouter } from "./routes/product.routes.js";
+import fileUpload from "express-fileupload";
+import { mediaRouter } from "./routes/media.route.js";
 
 configDotenv();
 
@@ -22,12 +24,13 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
+app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 // Routes
 // app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 app.get("/api/v1", (req, res) => res.send("welcome"));
-app.use("/api/v1/", authRouter, userRouter, productRouter);
+app.use("/api/v1/", authRouter, userRouter, productRouter, mediaRouter);
 
 // Error Handlers Middlewares
 app.use((req, res, next) => {

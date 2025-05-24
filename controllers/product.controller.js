@@ -54,8 +54,34 @@ export const createProduct = AsyncHandler(async (req, res) => {
   } */
 
   if (!req.body) throw new AppError(400, "fill the required data!");
+  const {
+    name,
+    sku,
+    description,
+    brand,
+    price,
+    salePrice,
+    stock,
+    isFeatured,
+    isVisible,
+    status,
+    handle,
+    images,
+  } = req.body;
 
-  const { error, value } = validateProduct(req.body);
+  const { error, value } = validateProduct({
+    name,
+    sku,
+    description,
+    brand,
+    price,
+    salePrice,
+    stock,
+    isFeatured,
+    isVisible,
+    status,
+    handle,
+  });
   if (error) {
     const errorMessages = error.details.map((err) => err.message);
     throw new AppError(400, "Validation Error", errorMessages);
@@ -66,7 +92,11 @@ export const createProduct = AsyncHandler(async (req, res) => {
   if (existing) {
     throw new AppError(400, "Product with this SKU already exists");
   }
-  const product = await Product.create({ ...value, user: req.user._id });
+  const product = await Product.create({
+    ...value,
+    user: req.user._id,
+    images,
+  });
 
   return res
     .status(201)
@@ -87,8 +117,33 @@ export const updateProduct = AsyncHandler(async (req, res) => {
   } */
 
   if (!req.body) throw new AppError(400, "fill the required data!");
-
-  const { error, value } = validateProduct(req.body);
+  const {
+    name,
+    sku,
+    description,
+    brand,
+    price,
+    salePrice,
+    stock,
+    isFeatured,
+    isVisible,
+    status,
+    handle,
+    images = [],
+  } = req.body;
+  const { error, value } = validateProduct({
+    name,
+    sku,
+    description,
+    brand,
+    price,
+    salePrice,
+    stock,
+    isFeatured,
+    isVisible,
+    status,
+    handle,
+  });
   if (error) {
     const errorMessages = error.details.map((err) => err.message);
     throw new AppError(400, "Validation Error", errorMessages);
@@ -102,7 +157,8 @@ export const updateProduct = AsyncHandler(async (req, res) => {
 
   const product = await Product.findOneAndUpdate(
     { sku: req.params.sku },
-    { ...value }
+    { ...value, images },
+    { new: true }
   );
 
   return res
@@ -148,7 +204,7 @@ export const getProductsByUser = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
-  const products = await Product.find({ user: req.user.id });
+  const products = await Product.find({ user: req.user.id }).populate("images");
 
   res.status(200).json(new AppResponse(200, products));
 });

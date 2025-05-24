@@ -38,15 +38,21 @@ const ProductSchema = new Schema(
       default: 0,
       type: Number,
     },
-    images: {
-      type: [
-        {
-          url: String,
-          public_id: String,
-        },
-      ],
-      default: [],
-    },
+    // images: {
+    //   type: [
+    //     {
+    //       url: String,
+    //       public_id: String,
+    //     },
+    //   ],
+    //   default: [],
+    // },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Media",
+      },
+    ],
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",

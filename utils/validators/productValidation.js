@@ -3,7 +3,7 @@ import Joi from "joi";
 
 export const productSchema = Joi.object({
   name: Joi.string().min(2).max(100).required(),
-  sku: Joi.string().alphanum().min(3).max(30).required(),
+  sku: Joi.string().min(3).max(30).required(),
   description: Joi.string().allow(""),
   //   collections: Joi.array().items(Joi.string().hex().length(24)), // assuming MongoDB ObjectId
   brand: Joi.string(),
