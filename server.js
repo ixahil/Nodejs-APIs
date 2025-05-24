@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import { AppError } from "./utils/AppError.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./utils/swagger-output.json" assert { type: "json" };
+import { productRouter } from "./routes/product.routes.js";
 
 configDotenv();
 
@@ -26,7 +27,7 @@ app.use(cookieParser());
 app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 app.get("/api/v1", (req, res) => res.send("welcome"));
-app.use("/api/v1/", authRouter, userRouter);
+app.use("/api/v1/", authRouter, userRouter, productRouter);
 
 // Error Handlers Middlewares
 app.use((req, res, next) => {

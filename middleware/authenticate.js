@@ -30,7 +30,7 @@ export const authenticate =
         );
       }
 
-      req.user = user._doc;
+      req.user = user;
       next();
     } catch (error) {
       res.clearCookie("AccessToken");
