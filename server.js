@@ -12,6 +12,7 @@ import swaggerOutput from "./utils/swagger-output.json" assert { type: "json" };
 import { productRouter } from "./routes/product.routes.js";
 import fileUpload from "express-fileupload";
 import { mediaRouter } from "./routes/media.route.js";
+import { brandRouter } from "./routes/brand.route.js";
 
 configDotenv();
 
@@ -30,7 +31,14 @@ app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 // app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 app.get("/api/v1", (req, res) => res.send("welcome"));
-app.use("/api/v1/", authRouter, userRouter, productRouter, mediaRouter);
+app.use(
+  "/api/v1/",
+  authRouter,
+  userRouter,
+  productRouter,
+  mediaRouter,
+  brandRouter
+);
 
 // Error Handlers Middlewares
 app.use((req, res, next) => {
