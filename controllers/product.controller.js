@@ -16,7 +16,7 @@ export const getProducts = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
-  const products = await Product.find();
+  const products = await Product.find().populate("images");
 
   res.status(200).json(new AppResponse(200, products));
 });
@@ -33,7 +33,9 @@ export const getProductBySku = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
-  const products = await Product.find({ sku: req.params.sku });
+  const products = await Product.find({ sku: req.params.sku }).populate(
+    "images"
+  );
 
   res.status(200).json(new AppResponse(200, products));
 });
@@ -94,7 +96,6 @@ export const createProduct = AsyncHandler(async (req, res) => {
   }
   const product = await Product.create({
     ...value,
-    user: req.user._id,
     images,
   });
 
@@ -204,7 +205,7 @@ export const getProductsByUser = AsyncHandler(async (req, res) => {
           description: 'Bad Request.',
           schema: { $ref: '#/definitions/ErrorResponse' }
   } */
-  const products = await Product.find({ user: req.user.id }).populate("images");
+  const products = await Product.find().populate("images");
 
   res.status(200).json(new AppResponse(200, products));
 });

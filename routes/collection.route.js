@@ -10,22 +10,22 @@ import { authenticate } from "../middleware/authenticate.js";
 
 export const collectionRouter = Router();
 
-collectionRouter.get("/collection/:slug", getCollectionBySlug);
-collectionRouter.get("/collection", getCollections);
+collectionRouter.get("/collections/:slug", getCollectionBySlug);
+collectionRouter.get("/collections", getCollections);
 
 // Protected
 collectionRouter.post(
-  "/admin/collection/create",
+  "/admin/collections/create",
   authenticate(["ADMIN"]),
   createCollection
 );
 collectionRouter.put(
-  "/admin/collection/:slug",
+  "/admin/collections/:slug",
   authenticate(["ADMIN"]),
   updateCollection
 );
 collectionRouter.delete(
-  "/admin/collection/:slug",
+  "/admin/collections/:slug",
   authenticate(["ADMIN"]),
   deleteCollectionBySlug
 );
